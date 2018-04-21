@@ -16,7 +16,7 @@ const routing_controllers_1 = require("routing-controllers");
 const entity_1 = require("./entity");
 let GameController = class GameController {
     getGame(id) {
-        return gamesById[id];
+        return entity_1.default.findByOne[id];
     }
 };
 __decorate([

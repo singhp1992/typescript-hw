@@ -8,6 +8,6 @@ export default class GameController {
     getGame(
         @Param('id') id: number
     ): Game {
-        return gamesById[id]
+        return Game.findByOne[id]
     }
 }
