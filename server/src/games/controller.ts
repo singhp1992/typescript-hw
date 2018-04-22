@@ -1,5 +1,21 @@
 import { JsonController, Get, Param, Post, Put, HttpCode, NotFoundError, Body, BadRequestError } from 'routing-controllers'
 import Game from './entity'
+import { validate } from 'class-validator';
+
+const selectedColors = ['red', 'blue', 'magenta', 'green', 'yellow']
+
+const defaultBoard = [
+    ['o', 'o', 'o'],
+    ['o', 'o', 'o'],
+    ['o', 'o', 'o']
+]
+
+    const moves = (board1: string[][], board2:[][]) => {
+         board1
+            .map((row, y) => row.filter((cell, x) => board2[y][x] !== cell))
+            .reduce((a, b) => a.concat(b))
+            .length
+    }
 
 @JsonController()
 export default class GameController {
@@ -20,15 +36,9 @@ export default class GameController {
 
     @Post('/games')
     @HttpCode(201)
-    async createGame(
+    createGame(
         @Body() game: Game
     ) {
-        const selectedColors = ['red', 'blue', 'magenta', 'green', 'yellow']
-        const defaultBoard = [
-            ['o', 'o', 'o'],
-            ['o', 'o', 'o'],
-            ['o', 'o', 'o']
-        ]
         game.color = selectedColors[Math.floor(Math.random() * selectedColors.length)]
         game.board = defaultBoard
         return game.save()
@@ -42,13 +52,14 @@ export default class GameController {
         const game = await Game.findOne(id)
         if (!game) throw new NotFoundError('cant find game')
 
-        // const moves = (board1, board2) =>
-        //     board1
-        //         .map((row, y) => row.filter((cell, x) => board2[y][x] !== cell))
-        //         .reduce((a, b) => a.concat(b))
-        //         .length
+        //not working 
+        if (update.board && moves > 1) throw new BadRequestError('not valid')
+    }
+     
+    }
 
-        return Game.merge(game, update).save()
+
+       return Game.merge(game, update).save()
     }
 
 

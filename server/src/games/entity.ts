@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
-//import { IsString, IsIn } from 'class-validator'
+import { IsString, ValidateNested } from 'class-validator'
 
 
 const defaultBoard = [
@@ -16,15 +16,15 @@ export default class Game extends BaseEntity {
     @PrimaryGeneratedColumn()
     id?: number
 
-    //@IsString()
+    @IsString()
     @Column('text', { nullable: false })
     name: string
 
-    //@IsIn(colors)
-    //@IsString()
+    @IsString()
     @Column('text', { default: false })
     color: string
 
+    @ValidateNested()
     @Column('json', { nullable: true, default: defaultBoard})
     board: string[][]
 
