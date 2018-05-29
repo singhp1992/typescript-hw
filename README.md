@@ -2,7 +2,7 @@
 
 In this assignment, I designed a simple back-end (API only) and to test my knowledge of typesript. 
 
-##Instructions
+## Instructions
 
 1. Create a `games` table with model using TypeORM. A game should have an `id`, a `name`, a `color` and `board` field. Both the name and color fields are `text` fields, the board field is of type `json`.  
 
