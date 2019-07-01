@@ -1,6 +1,6 @@
 ## Typescript Homework 
 
-In this assignment, I designed a simple back-end (API only) and to test my knowledge of typesript. 
+In this assignment, I designed a simple back-end (API only) and to test my knowledge of typescript. 
 
 ## Instructions
 
